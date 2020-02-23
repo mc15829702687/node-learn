@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>陕西省肺炎情况分布页面</title>
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="head">
+      <div class="head-bottom">
+        截止&nbsp;&nbsp;{{time}}&nbsp;&nbsp;08:35
+        <span class="data-from">
+          数据来源：陕西省卫健委
+        </span>
+      </div>
+    </div>
+    <div class="main">
+      <div class="main-left">
+        <div class="main-left-tend">
+          <ul class="yesterdaay-box">
+            <li class="yesterday-item" v-for="(item, index) in compareYesList" :key="index">
+              <div class="yesterday-num">较昨日<span class="num">{{item.num}}</span></div>
+              <div class="yesterday-sum">{{item.sum}}</div>
+              <div class="yesterday-name">{{item.name}}</div>
+            </li>
+          </ul>
+
+          <div class="epidemic-trend-chart">
+            <ul class="trend-ul">
+              <li class="trend-item">
+                <div class="box"></div>
+                <div class="text">确诊</div>
+              </li>
+              <li class="trend-item">
+                <div class="box"></div>
+                <div class="text">治愈</div>
+              </li>
+            </ul>
+            <div class="epidemic-trend-main" id="epidemic-trend-chart"></div>
+          </div>
+        </div>
+        <!-- 地图 -->
+        <div class="main-left-map">
+          <div class="map-ul">
+            <li class="map-li">
+              <div class="item map-city-name">地区/市</div>
+              <div class="item map-qz-name">确诊</div>
+              <div class="item map-cure-name">治愈</div>
+            </li>
+            <li class="map-li map-li-other" v-for="(item, index) in cityList" :key="index">
+              <div class="item map-city-name">{{item.name}}</div>
+              <div class="item map-qz-name"><span class="base-num">{{item.qzVal}}</span><span class="inc"
+                  v-show="item.inc > 0">+{{item.inc}}</span></div>
+              <div class="item map-cure-name">{{item.cureVal}}</div>
+            </li>
+          </div>
+          <div class="map" id="map"></div>
+          <ul class="legend-box">
+            <li class="legend-item">
+              <div class="legend-item-box"></div>
+              <div class="legend-num">0</div>
+            </li>
+            <li class="legend-item">
+              <div class="legend-item-box"></div>
+              <div class="legend-num">1-9</div>
+            </li>
+            <li class="legend-item">
+              <div class="legend-item-box"></div>
+              <div class="legend-num">10-99</div>
+            </li>
+            <li class="legend-item">
+              <div class="legend-item-box"></div>
+              <div class="legend-num">100-499</div>
+            </li>
+            <li class="legend-item">
+              <div class="legend-item-box"></div>
+              <div class="legend-num">500-999</div>
+            </li>
+            <li class="legend-item">
+              <div class="legend-item-box"></div>
+              <div class="legend-num">1000</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-left main-right">
+        <div class="main-left-tend">
+          <ul class="yesterdaay-box">
+            <li class="yesterday-item" v-for="(item, index) in xaCompareYesList" :key="index">
+              <div class="yesterday-num">较昨日<span class="num">{{item.num}}</span></div>
+              <div class="yesterday-sum">{{item.sum}}</div>
+              <div class="yesterday-name">{{item.name}}</div>
+            </li>
+          </ul>
+
+          <div class="epidemic-trend-chart">
+            <ul class="trend-ul">
+              <li class="trend-item">
+                <div class="box"></div>
+                <div class="text">确诊</div>
+              </li>
+              <li class="trend-item">
+                <div class="box"></div>
+                <div class="text">治愈</div>
+              </li>
+            </ul>
+            <div class="epidemic-trend-main" id="epidemic-trend-chart2"></div>
+          </div>
+        </div>
+        <div class="main-left-map">
+          <div class="map-ul">
+            <li class="map-li">
+              <div class="item map-city-name">地区/市</div>
+              <div class="item map-qz-name">确诊</div>
+              <div class="item map-cure-name">治愈</div>
+            </li>
+            <li class="map-li map-li-other" v-for="(item, index) in xaCityList" :key="index">
+              <div class="item map-city-name">{{item.name}}</div>
+              <div class="item map-qz-name"><span class="base-num" style="width: 20px;">{{item.qzVal}}</span><span class="inc"
+                  v-show="item.inc > 0">+{{item.inc}}</span></div>
+              <div class="item map-cure-name">{{item.cureVal}}</div>
+            </li>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/lib/echarts.min.js"></script>
+  <script src="./js/lib/vue.js"></script>
+  <script src="./js/json/shanxi.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
